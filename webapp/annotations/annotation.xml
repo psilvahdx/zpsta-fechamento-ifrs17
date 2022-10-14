@@ -1,0 +1,21 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+	<edmx:Reference Uri="/sap/opu/odata/sap/ZPSGW_FECHAMENTO_IFRS17_SRV/$metadata">
+		<edmx:Include Alias="Metadata" Namespace="ZPSGW_FECHAMENTO_IFRS17_SRV"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://wiki.scn.sap.com/wiki/download/attachments/448470968/UI.xml?api=v2">
+		<edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+	</edmx:Reference>
+	<edmx:DataServices>
+		<Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="teste.teste_app.resources.annotation0.ZPSGW_FECHAMENTO_IFRS17_SRV">
+			<Annotations Target="Metadata.FechamentoIFRS17">
+				<Annotation Term="UI.SelectionFields">
+					<Collection>
+						<PropertyPath>Bukrs</PropertyPath>
+						<PropertyPath>Ano</PropertyPath>
+						<PropertyPath>Mes</PropertyPath>
+					</Collection>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

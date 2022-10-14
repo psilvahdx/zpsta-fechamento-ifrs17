@@ -1,0 +1,269 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form">
+    <Dialog title="{i18n>etapa_fechamento_tit_txt}" id="editFechamentoDialog" contentWidth="80%" draggable="true" resizable="true">
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="headerFechamentoForm"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+                title="{i18n>empresa_txt}: {fechamentoIFRS17Model>Bukrs}"
+            >
+                <f:content>                
+                    <Label text="{i18n>ano_txt}" />
+                    <Text text="{fechamentoIFRS17Model>Ano}" />
+                    <Label text="{i18n>mes_txt}" />
+                    <Text text="{fechamentoIFRS17Model>Mes}" />
+                </f:content>
+            </f:SimpleForm>
+            <f:SimpleForm
+                id="prgFechamentoForm"
+                editable="true"
+                title="PRG"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                    <ComboBox id="cbStatusPrg" selectedKey="{fechamentoIFRS17Model>Prg/Statusarq}">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}"></core:Item>
+                            <core:Item key="1" text="{i18n>valido_txt}"></core:Item>
+                            <core:Item key="2" text="{i18n>invalido_txt}"></core:Item>
+                            <core:Item key="3" text="{i18n>invalidado_txt}"></core:Item>  
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"></core:Item>             
+                        </items>
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Prg/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>                
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="vecFechamentoForm"
+                editable="true"
+                title="VEC"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                    <ComboBox id="cbStatusVec" selectedKey="{fechamentoIFRS17Model>Vec/Statusarq}">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}"></core:Item>
+                            <core:Item key="1" text="{i18n>valido_txt}"></core:Item>
+                            <core:Item key="2" text="{i18n>invalido_txt}"></core:Item>
+                            <core:Item key="3" text="{i18n>invalidado_txt}"></core:Item>  
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"></core:Item>                
+                        </items>
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Vec/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>               
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="becfFechamentoForm"
+                editable="true"
+                title="BECF"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                    <ComboBox id="cbStatusBecf" selectedKey="{fechamentoIFRS17Model>Becf/Statusarq}">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}"></core:Item>
+                            <core:Item key="1" text="{i18n>valido_txt}"></core:Item>
+                            <core:Item key="2" text="{i18n>invalido_txt}"></core:Item>
+                            <core:Item key="3" text="{i18n>invalidado_txt}"></core:Item>  
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"></core:Item>                   
+                        </items>
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" labelFor="grpRbProcessBECF" />
+                    <Switch state="{fechamentoIFRS17Model>Becf/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>                  
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="tveFechamentoForm"
+                editable="true"
+                title="TVE"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                      <ComboBox id="cbStatusTve" selectedKey="{fechamentoIFRS17Model>Tve/Statusarq}">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}"></core:Item>
+                            <core:Item key="1" text="{i18n>valido_txt}"></core:Item>
+                            <core:Item key="2" text="{i18n>invalido_txt}"></core:Item>
+                            <core:Item key="3" text="{i18n>invalidado_txt}"></core:Item>  
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"></core:Item>                           
+                        </items>
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Tve/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>                 
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="jurosFechamentoForm"
+                editable="true"
+                title="JUROS"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                      <ComboBox id="cbStatusJuros" selectedKey="{fechamentoIFRS17Model>Juros/Statusarq}">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}"></core:Item>
+                            <core:Item key="1" text="{i18n>valido_txt}"></core:Item>
+                            <core:Item key="2" text="{i18n>invalido_txt}"></core:Item>
+                            <core:Item key="3" text="{i18n>invalidado_txt}"></core:Item>  
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"></core:Item>                  
+                        </items>
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Juros/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>                 
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="btFechamentoForm"
+                editable="true"
+                title="BT"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                    <ComboBox id="cbStatusBt" selectedKey="{fechamentoIFRS17Model>Bt/Statusarq}">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}"></core:Item>
+                            <core:Item key="1" text="{i18n>valido_txt}"></core:Item>
+                            <core:Item key="2" text="{i18n>invalido_txt}"></core:Item>
+                            <core:Item key="3" text="{i18n>invalidado_txt}"></core:Item>  
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"></core:Item>                     
+                        </items>
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Bt/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>                 
+                </f:content>
+            </f:SimpleForm>
+        </VBox>
+        <buttons>
+            <Button type="Emphasized" text="Salvar" id="savebtn" press="onFechamentoStepSave" ariaLabelledBy="editButtonLabel" />
+            <Button type="Default" text="Cancelar" id="addCancel" press="onCancel" ariaLabelledBy="editButtonLabel" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

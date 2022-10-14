@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZPSGW_FECHAMENTO_IFRS17_SRV" xml:lang="pt" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="FechamentoIFRS17" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Bukrs"/>
+                    <PropertyRef Name="Ano"/>
+                    <PropertyRef Name="Mes"/>
+                    <PropertyRef Name="Dataproc"/>
+                    <PropertyRef Name="Horaproc"/>
+                    <PropertyRef Name="Usuarioproc"/>
+                    <PropertyRef Name="Tipoarqproc"/>
+                </Key>
+                <Property Name="Bukrs" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Empresa" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Ano" Type="Edm.String" Nullable="false" MaxLength="4" sap:unicode="false" sap:label="Ano" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Mes" Type="Edm.String" Nullable="false" MaxLength="2" sap:unicode="false" sap:label="Mês" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Dataproc" Type="Edm.DateTime" Nullable="false" Precision="7" sap:unicode="false" sap:label="Data" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Horaproc" Type="Edm.Time" Nullable="false" Precision="0" sap:unicode="false" sap:label="Hora" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Usuarioproc" Type="Edm.String" Nullable="false" MaxLength="12" sap:unicode="false" sap:label="Nome do usuário" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Tipoarqproc" Type="Edm.String" Nullable="false" MaxLength="10" sap:unicode="false" sap:label="Tipo Arquivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Statusarq" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Status do Arquivo" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Acao" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="Ação" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityContainer Name="ZPSGW_FECHAMENTO_IFRS17_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="FechamentoIFRS17Set" EntityType="ZPSGW_FECHAMENTO_IFRS17_SRV.FechamentoIFRS17" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="https://U879.PORTOSEGURO.BRASIL:44300/sap/opu/odata/sap/ZPSGW_FECHAMENTO_IFRS17_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://U879.PORTOSEGURO.BRASIL:44300/sap/opu/odata/sap/ZPSGW_FECHAMENTO_IFRS17_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

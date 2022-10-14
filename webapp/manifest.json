@@ -1,0 +1,157 @@
+{
+    "_version": "1.37.0",
+    "sap.app": {
+        "id": "portoseguro.zpstafechifrs17app",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.7.1",
+            "toolsId": "34bb4f0b-9ec8-4768-8833-8ffec8263200"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZPSGW_FECHAMENTO_IFRS17_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": ["annotation"],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "annotation": {
+                "type": "ODataAnnotation",
+                "uri": "annotations/annotation.xml",
+                "settings": {
+                    "localUri": "annotations/annotation.xml"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "portoseguro-zpstafechifrs17app-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "ZSOFPSL",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.96.6",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "portoseguro.zpstafechifrs17app.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "operationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "groupId": "$direct",
+                    "synchronizationMode": "None",                    
+                    "useBatch": true
+                }
+            },
+            "fechamentoIFRS17Model":{
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "model/listFechamentoIFRS17.json"
+            },
+            "controleEtapasFechamentoModel":{
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "model/controleEtapasFechamento.json"
+            }
+        },
+        "resources": {
+            "css": [
+                {
+                    "uri": "css/style.css"
+                }
+            ]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "portoseguro.zpstafechifrs17app.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [
+                {
+                    "name": "RouteFechamentoList",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetFechamentoList"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetFechamentoList": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "FechamentoList",
+                    "viewName": "FechamentoList"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "portoseguro.zpstafechifrs17app.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

@@ -1,0 +1,171 @@
+<mvc:View controllerName="portoseguro.zpstafechifrs17app.controller.FechamentoList" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:tnt="sap.tnt" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fb="sap.ui.comp.filterbar" xmlns:f="sap.f">
+    <f:DynamicPage headerExpanded="true">
+        <!--<f:title>
+				<f:DynamicPageTitle>
+					<f:heading>
+						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
+					</f:heading>
+					<f:expandedContent>
+						<Label id="expandedLabel" text="No filters active" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label id="snappedLabel" text="No filters active" />
+					</f:snappedContent>
+				</f:DynamicPageTitle>
+			</f:title>-->
+        <f:header>
+            <f:DynamicPageHeader>
+                <f:content>
+                    <fb:FilterBar id="filterbar" persistencyKey="myPersKey" useToolbar="false" search=".onSearch" clear=".onClearFilter" showClearOnFB="true" showFilterConfiguration="false">
+                        <fb:filterItems>
+                            <fb:FilterItem name="Bukrs" label="{i18n>empresa_txt}">
+                                <fb:control>
+                                    <MultiComboBox name="Bukrs" selectionChange=".onSelectionChange">
+                                        <items>
+                                            <core:Item key="P001" text="P001 - PORTO SEGURO CIA SEGUROS" />
+                                            <core:Item key="P014" text="P014 - P S VIDA E PREVIDÊNCIA S" />
+                                            <core:Item key="P031" text="P031 - PORTOMED - SERV SAÚDE" />
+                                            <core:Item key="P032" text="P032 - PORTO SEGURO ODONTO" />
+                                            <core:Item key="P035" text="P035 - AZUL COMPANHIA SEG.GERAIS" />
+                                            <core:Item key="P050" text="P050 - P S - SEGURO SAÚDE S A" />
+                                            <core:Item key="P084" text="P084 - ITAÚ AUTO E RESIDÊNCIA" />
+                                            <core:Item key="P086" text="P086 - FUNDACAO SAUDE ITAU" />
+                                        </items>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="Ano" label="{i18n>ano_txt}">
+                                <fb:control>
+                                    <DatePicker displayFormat="yyyy" valueFormat="yyyy" />
+                                </fb:control>
+                            </fb:FilterItem>
+                            <fb:FilterItem name="Mes" label="{i18n>mes_txt}">
+                                <fb:control>
+                                    <MultiComboBox name="Mes" selectionChange=".onSelectionChange">
+                                        <items>
+                                            <core:Item key="01" text="01" />
+                                            <core:Item key="02" text="02" />
+                                            <core:Item key="03" text="03" />
+                                            <core:Item key="04" text="04" />
+                                            <core:Item key="05" text="05" />
+                                            <core:Item key="06" text="06" />
+                                            <core:Item key="07" text="07" />
+                                            <core:Item key="08" text="08" />
+                                            <core:Item key="09" text="09" />
+                                            <core:Item key="10" text="10" />
+                                            <core:Item key="11" text="11" />
+                                            <core:Item key="12" text="12" />
+                                        </items>
+                                    </MultiComboBox>
+                                </fb:control>
+                            </fb:FilterItem>
+                        </fb:filterItems>
+                    </fb:FilterBar>
+                </f:content>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <Table id="tblFechamentoIFRS17" width="100%" growing="true" growingScrollToLoad="true" growingThreshold="25" mode="None" itemPress="onTableItemPress" updateFinished="onUpdateFinished" items="{fechamentoIFRS17Model>/items}">
+                <headerToolbar>
+                    <OverflowToolbar design="Transparent">
+                        <content>
+                            <Title textAlign="Begin" text="{i18n>title}" />
+                            <ToolbarSpacer />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>empresa_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>ano_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>mes_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>prg_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>vec_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>becf_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>tve_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>juros_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>bt_txt}" width="auto" />
+                        </header>
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                        <header>
+                            <Text text="{i18n>liberar_fechamento_txt}" width="auto" />
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem type="Navigation" press="onFechamentoItemPress">
+                        <cells>
+                            <Text text="{fechamentoIFRS17Model>Bukrs}" />
+                            <Text text="{fechamentoIFRS17Model>Ano}" />
+                            <Text text="{fechamentoIFRS17Model>Mes}" />
+                            <ObjectStatus
+                                icon="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}"
+                                state="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusFechamento'}"
+                            />
+                            <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                            <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                            <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                            <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                            <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                            <Switch 
+                                enabled="{fechamentoIFRS17Model>EtapasValidas}"
+                                state="{fechamentoIFRS17Model>LiberaFechamento}" 
+                                type="AcceptReject" 
+                                change="onStateFechamentoChange" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </f:content>
+    </f:DynamicPage>
+</mvc:View>
