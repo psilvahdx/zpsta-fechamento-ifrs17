@@ -54,5 +54,22 @@ sap.ui.define([], function() {
                     return "sap-icon://less"; 
             }
         },
+        getListEnabledStatusByStatus: function(oStatus){
+            let bResult = false;
+
+            switch (oStatus) {
+                case "1":
+                    bResult = true
+                    break;
+                case "3":    
+                    bResult = true
+                    break;            
+                default:                    
+                    bResult = false
+                    break;
+            }         
+
+            return bResult;
+        }
     };
 });

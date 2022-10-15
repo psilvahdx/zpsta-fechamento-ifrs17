@@ -36,11 +36,17 @@ sap.ui.define([
             getFechamentoData: function () {
 
                 let sPath = "/FechamentoIFRS17Set",
-                    oDefaultModel = this.getModel(),                    
+                    oDefaultModel = this.getModel(),
                     that = this,
                     oListFechamentoModel = this.getModel("fechamentoIFRS17Model");
 
-                oDefaultModel.read(sPath, {
+                oDefaultModel.read(sPath,
+                    {
+                        sorters: [					
+                            new sap.ui.model.Sorter("Bukrs", false),
+                            new sap.ui.model.Sorter("Ano", false),
+                            new sap.ui.model.Sorter("Mes", false),
+                          ],
                         success: function (oRetrievedResult) {
 
                             if (oRetrievedResult.results) {
@@ -48,10 +54,11 @@ sap.ui.define([
                                 let aListFechamento = {
                                     items: []
                                 };
-                                let aResults = oRetrievedResult.results;                                
+                                let aResults = oRetrievedResult.results;
                                 let ObjMap = that.groupByFechamentoKey(aResults);
-                                aListFechamento.items = that.getFechamentoLineItemsByMap(ObjMap);                               
-                                oListFechamentoModel.setData(aListFechamento);                               
+                                aListFechamento.items = that.getFechamentoLineItemsByMap(ObjMap);
+                                oListFechamentoModel.setData(aListFechamento);
+                                oListFechamentoModel.refresh();
 
                             }
 
@@ -64,7 +71,7 @@ sap.ui.define([
                 );
 
             },
-            groupByFechamentoKey: function(aResults){
+            groupByFechamentoKey: function (aResults) {
 
                 let ObjMap = {};
 
@@ -82,7 +89,7 @@ sap.ui.define([
                 return ObjMap;
 
             },
-            getFechamentoLineItemsByMap: function(ObjMap){
+            getFechamentoLineItemsByMap: function (ObjMap) {
 
                 let aRows = [];
 
@@ -124,43 +131,44 @@ sap.ui.define([
                     };
 
                     for (let line of ObjMap[fechamentoKey]) {
-                        
+
                         var item = line.element;
 
                         if (item.Tipoarqproc === 'PRG') {
                             oRow.Prg = {
-                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq ,
-                                Acao: item.Acao === "1" ? true : false
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false
+
                             }
                         }
                         if (item.Tipoarqproc === 'VEC') {
                             oRow.Vec = {
-                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq ,
-                                Acao: item.Acao === "1" ? true : false
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false
                             }
                         }
                         if (item.Tipoarqproc === 'BECF') {
                             oRow.Becf = {
-                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq ,
-                                Acao: item.Acao === "1" ? true : false
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false
                             }
                         }
                         if (item.Tipoarqproc === 'TVE') {
                             oRow.Tve = {
-                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq ,
-                                Acao: item.Acao === "1" ? true : false
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false
                             }
                         }
                         if (item.Tipoarqproc === 'JUROS') {
                             oRow.Juros = {
-                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq ,
-                                Acao: item.Acao === "1" ? true : false
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false
                             }
                         }
                         if (item.Tipoarqproc === 'BT') {
                             oRow.Bt = {
-                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq ,
-                                Acao: item.Acao === "1" ? true : false
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false
                             }
                         }
 
@@ -173,6 +181,32 @@ sap.ui.define([
                 }
 
                 return aRows;
+            },
+
+            getListEnabledStatusByStatus: function (oStatus) {
+                let aResult = [];
+
+                switch (oStatus) {
+                    case "1":
+                        aResult.push({
+                            statusKey: "1",
+                            statusText: this.formatter.formatStatusTextFechamento("1")
+                        }, {
+                            statusKey: "3",
+                            statusText: this.formatter.formatStatusTextFechamento("3")
+                        });
+                        break;
+
+                    default:
+                        aResult.push({
+                            statusKey: oStatus,
+                            statusText: this.formatter.formatStatusTextFechamento(oStatus)
+                        });
+                        break;
+                }
+
+
+                return aResult;
             },
 
 
@@ -252,10 +286,10 @@ sap.ui.define([
                 var oStateFechamentoControl = oEvent.getSource(),
                     //oCtx = oStateFechamentoControl.getBindingContext(),
                     //oObject = this.getModel().getObject(oCtx.getPath());
-                    oCtx = oStateFechamentoControl.oPropagatedProperties.oBindingContexts, 
-                    oFechamentoModel =  this.getModel("fechamentoIFRS17Model"),                  
+                    oCtx = oStateFechamentoControl.oPropagatedProperties.oBindingContexts,
+                    oFechamentoModel = this.getModel("fechamentoIFRS17Model"),
                     oObject = oFechamentoModel.getObject(oCtx.fechamentoIFRS17Model.getPath());
-                
+
 
                 let sMessage = `Confirma a liberação do Fechamento IFRS17 no Período ${oObject.Mes}/${oObject.Ano} para Empresa ${oObject.Bukrs}?`;
 
@@ -282,31 +316,63 @@ sap.ui.define([
             onFechamentoItemPress: function (oEvent) {
                 var that = this,
                     oSelectedItem = oEvent.getSource(),
-                    //oContext = oSelectedItem.getBindingContext(),
-                    //sPath = oContext.getPath(),
+                    sDialogName = "",
+                    oFechamentoIFRS17Model = this.getModel("fechamentoIFRS17Model"),
                     oContext = oSelectedItem.oBindingContexts,
-                    sPath = oContext.fechamentoIFRS17Model.getPath();
-                
-                
+                    sPath = oContext.fechamentoIFRS17Model.getPath(),
+                    oObject = oFechamentoIFRS17Model.getObject(sPath);
 
-                if (!this.oDialog) {
-                    this.oDialog = Fragment.load({
-                        name: "portoseguro.zpstafechifrs17app.view.dialogs.EditStepsFechamento",
-                        controller: this
-                    });
+                if (oObject.LiberaFechamento && !oObject.EtapasValidas) {
+                    //Somente Visualização
+                    sDialogName = "portoseguro.zpstafechifrs17app.view.dialogs.DisplayStepsFechamento";
+                    if (!this.oDialogDisplay) {
+                        this.oDialogDisplay = Fragment.load({
+                            name: sDialogName,
+                            controller: this
+                        });
 
+                    }
+                    this.oDialogDisplay.then(function (oDialogDisplay) {
+                        that.getView().addDependent(oDialogDisplay);
+                        oDialogDisplay.bindElement({
+                            path: sPath,
+                            model: "fechamentoIFRS17Model"
+                        });
+                        oDialogDisplay.open();
+                    }.bind(this));
+                } else {
+                    //Edição
+                    sDialogName = "portoseguro.zpstafechifrs17app.view.dialogs.EditStepsFechamento"
+                    if (!this.oDialog) {
+                        this.oDialog = Fragment.load({
+                            name: sDialogName,
+                            controller: this
+                        });
+
+                    }
+                    this.oDialog.then(function (oDialog) {
+                        that.getView().addDependent(oDialog);
+                        oDialog.bindElement({
+                            path: sPath,
+                            model: "fechamentoIFRS17Model"
+                        });
+                        oDialog.open();
+                    }.bind(this));
                 }
-                this.oDialog.then(function (oDialog) {
-                    that.getView().addDependent(oDialog);
-                    oDialog.bindElement({
-                        path: sPath,
-                        model: "fechamentoIFRS17Model"
-                    });
-                    oDialog.open();
-                }.bind(this));
+
+
+
+
             },
             onCancel: function (oEvent) {
-                sap.ui.getCore().byId("editFechamentoDialog").close();
+                if (oEvent.getParameter("id") !== "displayCancel") {
+                    sap.ui.getCore().byId("editFechamentoDialog").close();
+                    sap.ui.getCore().byId("cbStatusPrg").clearSelection();
+                    this.getFechamentoData();
+                } else {
+                    sap.ui.getCore().byId("displayFechamentoDialog").close();
+                }
+
             },
             onFechamentoStepSave: function (oEvent) {
                 let oDialog = sap.ui.getCore().byId("editFechamentoDialog"),
@@ -314,8 +380,12 @@ sap.ui.define([
                     oContext = oDialog.mObjectBindingInfos.fechamentoIFRS17Model,
                     oObject = oFechamentoModel.getObject(oContext.path);
                 oObject.EtapasValidas = this.enableLiberarFechamento(oObject);
-                MessageToast.show(`Registro salvo com sucesso: JSON: ${JSON.stringify(oObject)}`);
-                oFechamentoModel.refresh();
+                //MessageToast.show(`Registro salvo com sucesso: JSON: ${JSON.stringify(oObject)}`);
+                sap.ui.getCore().byId("editFechamentoDialog").close();
+                //oFechamentoModel.refresh();
+
+                this.sendRequest(oObject,"");
+
             },
             enableLiberarFechamento: function (oFechamento) {
 
@@ -337,6 +407,25 @@ sap.ui.define([
                 }
 
                 return isEnabled;
+
+            },
+            sendRequest: function (oObject, sAction) {
+
+                let oDefaultModel = this.getModel(),
+                    that = this,
+                    sPath = "/SteptsFechIFRS17Set";
+
+                oDefaultModel.create(sPath, oObject, {
+                        success: function(oResult){
+                            MessageToast.show("Registro salvo com Sucesso!");
+                            that.getFechamentoData();
+                        },
+                        error: function(oError){
+                            MessageBox.error("Ocorreu um erro ao salvar as etapas do Fechamento");
+                            console.log(oError);
+                        }
+
+                    });
 
             }
 
