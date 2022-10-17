@@ -29,4 +29,4 @@ server:
       afterMiddleware: fiori-tools-appreload
       configuration:
         component: portoseguro.zpstafechifrs17app
-        ui5Theme: sap_horizon
+        ui5Theme: sap_belize

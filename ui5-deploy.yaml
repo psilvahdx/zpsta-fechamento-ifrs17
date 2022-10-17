@@ -14,9 +14,13 @@ builder:
       afterTask: generateCachebusterInfo
       configuration:
         target:
-          url: https://u879.portoseguro.brasil:44301
+          url: http://u879.portoseguro.brasil:8200
           client: "100"
+          auth: basic
+        credentials:
+          username: env:UI5_USERNAME
+          password: env:UI5_PASSWORD
         app:
           name: ZPSTA_FECIFRS17
           package: zfpsl
-          transport: SFDK903942
+          transport: SFDK903941

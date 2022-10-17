@@ -20,7 +20,7 @@ sap.ui.define([
                 this.oResourceBundle = this.getResourceBundle();
                 this.formatter.setResourceBundle(this.oResourceBundle);
 
-                this.getFechamentoData();
+                this.getFechamentoData([]);
 
             },
             onAfterRendering: function () {
@@ -33,7 +33,7 @@ sap.ui.define([
 
             },
 
-            getFechamentoData: function () {
+            getFechamentoData: function (aFilters) {
 
                 let sPath = "/FechamentoIFRS17Set",
                     oDefaultModel = this.getModel(),
@@ -47,6 +47,7 @@ sap.ui.define([
                             new sap.ui.model.Sorter("Ano", false),
                             new sap.ui.model.Sorter("Mes", false),
                           ],
+                        filters: aFilters,
                         success: function (oRetrievedResult) {
 
                             if (oRetrievedResult.results) {
@@ -171,6 +172,11 @@ sap.ui.define([
                                 Acao: item.Acao === "X" ? true : false
                             }
                         }
+                        if (item.Tipoarqproc === 'FECHAMENTO') {
+                            if(item.Acao === "X"){
+                                oRow.LiberaFechamento = true      
+                            }
+                        }
 
                         //oRow.LiberaFechamento = item.Acao === "1" ? true : false;
                         oRow.EtapasValidas = this.enableLiberarFechamento(oRow);
@@ -258,8 +264,9 @@ sap.ui.define([
                     return aResult;
                 }, []);
 
-                oTable.getBinding("items").filter(aTableFilters);
-                oTable.setShowOverlay(false);
+                this.getFechamentoData(aTableFilters);
+                /*oTable.getBinding("items").filter(aTableFilters);
+                oTable.setShowOverlay(false);*/
             },
             onClearFilter: function () {
                 var oFilterBar = this.byId("filterbar"),
@@ -278,8 +285,7 @@ sap.ui.define([
                     return aResult;
                 }, []);
 
-                oTable.getBinding("items").filter(aTableFilters);
-                oTable.setShowOverlay(false);
+                this.getFechamentoData(aTableFilters);
             },
             onStateFechamentoChange: function (oEvent) {
 
@@ -287,6 +293,7 @@ sap.ui.define([
                     //oCtx = oStateFechamentoControl.getBindingContext(),
                     //oObject = this.getModel().getObject(oCtx.getPath());
                     oCtx = oStateFechamentoControl.oPropagatedProperties.oBindingContexts,
+                    that = this,
                     oFechamentoModel = this.getModel("fechamentoIFRS17Model"),
                     oObject = oFechamentoModel.getObject(oCtx.fechamentoIFRS17Model.getPath());
 
@@ -300,18 +307,25 @@ sap.ui.define([
                         emphasizedAction: MessageBox.Action.OK,
                         onClose: function (sAction) {
                             if (sAction == MessageBox.Action.YES) {
-                                MessageToast.show("Fechamento IFRS17 Liberado!");
+                                
                                 oObject.EtapasValidas = false;
-                                oFechamentoModel.refresh();
+                                that.sendLiberacaoFechamentoIFRS17(oObject);
+                                //oFechamentoModel.refresh();
                             } else {
                                 oStateFechamentoControl.setState(false);
-                                MessageToast.show("Fechamento IFRS17 Não Liberado!");
+                                
                             }
                         }
                     });
 
                 }
 
+            },
+            sendLiberacaoFechamentoIFRS17: function(oObject){
+                
+                oObject.LiberaFechamento = true;
+                this.sendRequest(oObject, "LIB_FECHAMENTO");
+                
             },
             onFechamentoItemPress: function (oEvent) {
                 var that = this,
@@ -368,7 +382,7 @@ sap.ui.define([
                 if (oEvent.getParameter("id") !== "displayCancel") {
                     sap.ui.getCore().byId("editFechamentoDialog").close();
                     sap.ui.getCore().byId("cbStatusPrg").clearSelection();
-                    this.getFechamentoData();
+                    this.onSearch(oEvent);
                 } else {
                     sap.ui.getCore().byId("displayFechamentoDialog").close();
                 }
@@ -393,17 +407,20 @@ sap.ui.define([
 
                 if (oFechamento) {
 
-                    if (
-                        (oFechamento.Prg.Acao === true && oFechamento.Prg.Statusarq === "1") &&
-                        (oFechamento.Vec.Acao === true && oFechamento.Vec.Statusarq === "1") &&
-                        (oFechamento.Becf.Acao === true && oFechamento.Becf.Statusarq === "1") &&
-                        (oFechamento.Tve.Acao === true && oFechamento.Tve.Statusarq === "1") &&
-                        (oFechamento.Juros.Acao === true && oFechamento.Juros.Statusarq === "1") &&
-                        (oFechamento.Bt.Acao === true && oFechamento.Bt.Statusarq === "1")
-                    ) {
-                        isEnabled = true;
+                    if(!oFechamento.LiberaFechamento){
+                        if (
+                            (oFechamento.Prg.Acao === true && oFechamento.Prg.Statusarq === "1") &&
+                            (oFechamento.Vec.Acao === true && oFechamento.Vec.Statusarq === "1") &&
+                            (oFechamento.Becf.Acao === true && oFechamento.Becf.Statusarq === "1") &&
+                            (oFechamento.Tve.Acao === true && oFechamento.Tve.Statusarq === "1") &&
+                            (oFechamento.Juros.Acao === true && oFechamento.Juros.Statusarq === "1") &&
+                            (oFechamento.Bt.Acao === true && oFechamento.Bt.Statusarq === "1")
+                        ) {
+                            isEnabled = true;
+                        }
+    
                     }
-
+                  
                 }
 
                 return isEnabled;
@@ -413,15 +430,22 @@ sap.ui.define([
 
                 let oDefaultModel = this.getModel(),
                     that = this,
+                    sSuccesMessage = "Etapa Salva com Sucesso!",
+                    sErrorMessage = "Ocorreu um erro ao salvar a Etapa.",
                     sPath = "/SteptsFechIFRS17Set";
+
+                 if(sAction == "LIB_FECHAMENTO") {
+                    sSuccesMessage = "Requisição para Liberar Fechamento IFRS17 salva com Sucesso!";
+                    sErrorMessage = "Erro ao Solicitar liberação do Fechamento IFRS17";
+                 }
 
                 oDefaultModel.create(sPath, oObject, {
                         success: function(oResult){
-                            MessageToast.show("Registro salvo com Sucesso!");
-                            that.getFechamentoData();
+                            MessageToast.show(sSuccesMessage);
+                            that.onSearch();
                         },
                         error: function(oError){
-                            MessageBox.error("Ocorreu um erro ao salvar as etapas do Fechamento");
+                            MessageBox.error(sErrorMessage);
                             console.log(oError);
                         }
 
