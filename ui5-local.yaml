@@ -6,7 +6,7 @@ metadata:
 type: application
 framework:
   name: SAPUI5
-  version: 1.96.6
+  version: 1.71.19
   libraries:
     - name: sap.m
     - name: sap.ui.core

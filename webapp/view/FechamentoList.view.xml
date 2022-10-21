@@ -1,5 +1,5 @@
 <mvc:View controllerName="portoseguro.zpstafechifrs17app.controller.FechamentoList" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:tnt="sap.tnt" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fb="sap.ui.comp.filterbar" xmlns:f="sap.f">
-    <f:DynamicPage headerExpanded="true">
+    <f:DynamicPage headerExpanded="true" busy="{fechamentoListView>/busy}">
         <!--<f:title>
 				<f:DynamicPageTitle>
 					<f:heading>
@@ -92,25 +92,25 @@
                     </Column>
                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
                         <header>
-                            <Text text="{i18n>prg_txt}" width="auto" />
+                            <Text text="{i18n>prg_txt}" width="auto" tooltip="{i18n>prg_desc_txt}" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" >
                         <header>
-                            <Text text="{i18n>vec_txt}" width="auto" />
+                            <Text text="{i18n>vec_txt}" width="auto" tooltip="{i18n>vec_desc_txt}" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                   <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
                         <header>
                             <Text text="{i18n>becf_txt}" width="auto" />
                         </header>
-                    </Column>
+                    </Column>-->
                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
                         <header>
-                            <Text text="{i18n>tve_txt}" width="auto" />
+                            <Text text="{i18n>tve_txt}" width="auto" tooltip="{i18n>tve_desc_txt}" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                     <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
                         <header>
                             <Text text="{i18n>juros_txt}" width="auto" />
                         </header>
@@ -119,7 +119,7 @@
                         <header>
                             <Text text="{i18n>bt_txt}" width="auto" />
                         </header>
-                    </Column>
+                    </Column>-->
                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
                         <header>
                             <Text text="{i18n>liberar_fechamento_txt}" width="auto" />
@@ -141,22 +141,22 @@
                                 icon="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                            <ObjectStatus 
+                            <!--<ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->
                             <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                            <ObjectStatus 
+                            <!--<ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
                             <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                                state="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->
                             <Switch 
                                 enabled="{fechamentoIFRS17Model>EtapasValidas}"
                                 state="{fechamentoIFRS17Model>LiberaFechamento}" 

@@ -30,7 +30,7 @@
             <f:SimpleForm
                 id="displayPrgFechamentoForm"
                 editable="false"
-                title="PRG"
+                title="{i18n>prg_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -47,8 +47,7 @@
                 singleContainerFullSize="false"
             >
                 <f:content>
-                    <Label text="{i18n>status_txt}" />    
-                    <!--<Text text="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter: '.formatter.formatStatusTextFechamento'}"></Text>-->
+                    <Label text="{i18n>status_txt}" />                       
                      <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 text="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
@@ -66,7 +65,7 @@
             <f:SimpleForm
                 id="displayVecFechamentoForm"
                 editable="true"
-                title="VEC"
+                title="{i18n>vec_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -97,10 +96,10 @@
                 </f:content>
             </f:SimpleForm>
 
-            <f:SimpleForm
+           <!--<f:SimpleForm
                 id="displayBecfFechamentoForm"
                 editable="true"
-                title="BECF"
+                title="{i18n>becf_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -129,12 +128,12 @@
                         </layoutData>
                     </Switch>                  
                 </f:content>
-            </f:SimpleForm>
+            </f:SimpleForm>-->
 
             <f:SimpleForm
                 id="displayTveFechamentoForm"
                 editable="true"
-                title="TVE"
+                title="{i18n>tve_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -165,10 +164,10 @@
                 </f:content>
             </f:SimpleForm>
 
-            <f:SimpleForm
+            <!--<f:SimpleForm
                 id="displayJurosFechamentoForm"
                 editable="true"
-                title="JUROS"
+                title="{i18n>juros_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -197,12 +196,12 @@
                         </layoutData>
                     </Switch>                 
                 </f:content>
-            </f:SimpleForm>
+            </f:SimpleForm>-->
 
-            <f:SimpleForm
+            <!--<f:SimpleForm
                 id="displayBtFechamentoForm"
                 editable="true"
-                title="BT"
+                title="{i18n>bt_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -231,7 +230,7 @@
                         </layoutData>
                     </Switch>                 
                 </f:content>
-            </f:SimpleForm>
+            </f:SimpleForm>-->
         </VBox>
         <buttons>            
             <Button type="Default"  text="{i18n>btn_cancelar_txt}" id="displayCancel" press="onCancel" ariaLabelledBy="editButtonLabel" />

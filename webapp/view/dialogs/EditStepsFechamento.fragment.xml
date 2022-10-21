@@ -30,7 +30,7 @@
             <f:SimpleForm
                 id="prgFechamentoForm"
                 editable="true"
-                title="PRG"
+                title="{i18n>prg_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -48,7 +48,7 @@
             >
                 <f:content>
                     <Label text="{i18n>status_txt}" />
-                    <ComboBox id="cbStatusPrg" selectedKey="{fechamentoIFRS17Model>Prg/Statusarq}" enabled="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}">
+                    <ComboBox id="cbStatusPrg" selectedKey="{fechamentoIFRS17Model>Prg/Statusarq}" enabled="{fechamentoIFRS17Model>Prg/enabled}" selectionChange=".onSelectionStatusChange">
                         <items>
                             <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
                             <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
@@ -58,7 +58,8 @@
                         </items>
                     </ComboBox>
                     <Label text="{i18n>processar_txt}" />
-                    <Switch state="{fechamentoIFRS17Model>Prg/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{=${fechamentoIFRS17Model>Prg/Statusarq} === '1' ? true : false}">
+                    <Switch state="{fechamentoIFRS17Model>Prg/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Prg/enabled}"
+                    change=".onActionFechamentoChange">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
@@ -69,7 +70,7 @@
             <f:SimpleForm
                 id="vecFechamentoForm"
                 editable="true"
-                title="VEC"
+                title="{i18n>vec_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -87,7 +88,7 @@
             >
                 <f:content>
                     <Label text="{i18n>status_txt}" />
-                    <ComboBox id="cbStatusVec" selectedKey="{fechamentoIFRS17Model>Vec/Statusarq}" enabled="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}">
+                    <ComboBox id="cbStatusVec" selectedKey="{fechamentoIFRS17Model>Vec/Statusarq}" enabled="{fechamentoIFRS17Model>Vec/enabled}" selectionChange=".onSelectionStatusChange">
                         <items>
                             <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
                             <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
@@ -97,7 +98,8 @@
                         </items>
                     </ComboBox>
                     <Label text="{i18n>processar_txt}" />
-                    <Switch state="{fechamentoIFRS17Model>Vec/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{=${fechamentoIFRS17Model>Vec/Statusarq} === '1' ? true : false}">
+                    <Switch state="{fechamentoIFRS17Model>Vec/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Vec/enabled}"
+                    change=".onActionFechamentoChange">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
@@ -105,7 +107,7 @@
                 </f:content>
             </f:SimpleForm>
 
-            <f:SimpleForm
+           <!-- <f:SimpleForm
                 id="becfFechamentoForm"
                 editable="true"
                 title="BECF"
@@ -126,7 +128,7 @@
             >
                 <f:content>
                     <Label text="{i18n>status_txt}" />
-                    <ComboBox id="cbStatusBecf" selectedKey="{fechamentoIFRS17Model>Becf/Statusarq}" enabled="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}">
+                    <ComboBox id="cbStatusBecf" selectedKey="{fechamentoIFRS17Model>Becf/Statusarq}" enabled="{fechamentoIFRS17Model>Becf/enabled}" selectionChange=".onSelectionStatusChange">
                         <items>
                             <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
                             <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
@@ -136,18 +138,19 @@
                         </items>
                     </ComboBox>
                     <Label text="{i18n>processar_txt}" labelFor="grpRbProcessBECF" />
-                    <Switch state="{fechamentoIFRS17Model>Becf/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{=${fechamentoIFRS17Model>Becf/Statusarq} === '1' ? true : false}">
+                    <Switch state="{fechamentoIFRS17Model>Becf/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Becf/enabled}"
+                    change=".onActionFechamentoChange">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
                     </Switch>
                 </f:content>
-            </f:SimpleForm>
+            </f:SimpleForm>-->
 
             <f:SimpleForm
                 id="tveFechamentoForm"
                 editable="true"
-                title="TVE"
+                title="{i18n>tve_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -165,7 +168,7 @@
             >
                 <f:content>
                     <Label text="{i18n>status_txt}" />
-                    <ComboBox id="cbStatusTve" selectedKey="{fechamentoIFRS17Model>Tve/Statusarq}" enabled="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}">
+                    <ComboBox id="cbStatusTve" selectedKey="{fechamentoIFRS17Model>Tve/Statusarq}" enabled="{fechamentoIFRS17Model>Tve/enabled}" selectionChange=".onSelectionStatusChange">
                         <items>
                             <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
                             <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
@@ -175,7 +178,8 @@
                         </items>                       
                     </ComboBox>
                     <Label text="{i18n>processar_txt}" />
-                    <Switch state="{fechamentoIFRS17Model>Tve/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{=${fechamentoIFRS17Model>Tve/Statusarq} === '1' ? true : false}">
+                    <Switch state="{fechamentoIFRS17Model>Tve/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Tve/enabled}"
+                    change=".onActionFechamentoChange">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
@@ -183,7 +187,7 @@
                 </f:content>
             </f:SimpleForm>
 
-            <f:SimpleForm
+           <!--<f:SimpleForm
                 id="jurosFechamentoForm"
                 editable="true"
                 title="JUROS"
@@ -204,7 +208,7 @@
             >
                 <f:content>
                     <Label text="{i18n>status_txt}" />
-                    <ComboBox id="cbStatusJuros" selectedKey="{fechamentoIFRS17Model>Juros/Statusarq}" enabled="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}">
+                    <ComboBox id="cbStatusJuros" selectedKey="{fechamentoIFRS17Model>Juros/Statusarq}" enabled="{fechamentoIFRS17Model>Juros/enabled}" selectionChange=".onSelectionStatusChange">
                         <items>
                             <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
                             <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
@@ -214,7 +218,8 @@
                         </items>
                     </ComboBox>
                     <Label text="{i18n>processar_txt}" />
-                    <Switch state="{fechamentoIFRS17Model>Juros/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{=${fechamentoIFRS17Model>Juros/Statusarq} === '1' ? true : false}">
+                    <Switch state="{fechamentoIFRS17Model>Juros/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Juros/enabled}"
+                    change=".onActionFechamentoChange">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
@@ -243,7 +248,7 @@
             >
                 <f:content>
                     <Label text="{i18n>status_txt}" />
-                    <ComboBox id="cbStatusBt" selectedKey="{fechamentoIFRS17Model>Bt/Statusarq}" enabled="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}">
+                    <ComboBox id="cbStatusBt" selectedKey="{fechamentoIFRS17Model>Bt/Statusarq}" enabled="{fechamentoIFRS17Model>Bt/enabled}" selectionChange=".onSelectionStatusChange">
                         <items>
                             <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
                             <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
@@ -253,13 +258,14 @@
                         </items>
                     </ComboBox>
                     <Label text="{i18n>processar_txt}" />
-                    <Switch state="{fechamentoIFRS17Model>Bt/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{=${fechamentoIFRS17Model>Bt/Statusarq} === '1' ? true : false}" >
+                    <Switch state="{fechamentoIFRS17Model>Bt/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Bt/enabled}"
+                    change=".onActionFechamentoChange">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
                     </Switch>
                 </f:content>
-            </f:SimpleForm>
+            </f:SimpleForm>--> 
         </VBox>
         <buttons>
             <Button type="Emphasized" text="{i18n>btn_salvar_txt}" id="savebtn" press="onFechamentoStepSave" ariaLabelledBy="editButtonLabel" />
