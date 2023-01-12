@@ -52,13 +52,14 @@
                                 icon="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 text="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-
-                    <Label text="{i18n>processar_txt}" />
+                     <Button id="btnPrgShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                     visible="{= ${fechamentoIFRS17Model>Prg/Statusarq} === '2' ? true : false}"></Button>    
+                    <!--<Label text="{i18n>processar_txt}" />
                     <Switch state="{fechamentoIFRS17Model>Prg/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
-                    </Switch>                
+                    </Switch>-->                
                 </f:content>
             </f:SimpleForm>
 
@@ -87,19 +88,21 @@
                                 icon="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 text="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                    <Label text="{i18n>processar_txt}" />
+                    <Button id="btnVecShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                     visible="{= ${fechamentoIFRS17Model>Vec/Statusarq} === '2' ? true : false}"></Button>                                  
+                    <!--<Label text="{i18n>processar_txt}" />
                     <Switch state="{fechamentoIFRS17Model>Vec/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
-                    </Switch>               
+                    </Switch>-->               
                 </f:content>
             </f:SimpleForm>
 
-           <!--<f:SimpleForm
-                id="displayBecfFechamentoForm"
+           <f:SimpleForm
+                id="displayBcaFechamentoForm"
                 editable="true"
-                title="{i18n>becf_desc_txt}"
+                title="{i18n>bca_desc_txt}"
                 layout="ResponsiveGridLayout"
                 labelSpanXL="4"
                 labelSpanL="4"
@@ -118,17 +121,92 @@
                 <f:content>
                     <Label text="{i18n>status_txt}" />                    
                      <ObjectStatus 
-                                icon="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
-                                text="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                    <Label text="{i18n>processar_txt}" />
+                                icon="{path: 'fechamentoIFRS17Model>Bca/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'fechamentoIFRS17Model>Bca/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Bca/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                    <Button id="btnBcaShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                     visible="{= ${fechamentoIFRS17Model>Bca/Statusarq} === '2' ? true : false}"></Button>   
+                    <!--<Label text="{i18n>processar_txt}" />
                     <Switch state="{fechamentoIFRS17Model>Becf/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
-                    </Switch>                  
+                    </Switch>-->                
                 </f:content>
-            </f:SimpleForm>-->
+            </f:SimpleForm>
+
+             <f:SimpleForm
+                id="displayBcdFechamentoForm"
+                editable="true"
+                title="{i18n>bcd_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                     <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                     <Button id="btnBcdShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${fechamentoIFRS17Model>Bcd/Statusarq} === '2' ? true : false}"></Button> 
+                    <!--<Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Becf/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>-->                
+                </f:content>
+            </f:SimpleForm>
+
+
+            <f:SimpleForm
+                id="displayRvneFechamentoForm"
+                editable="true"
+                title="{i18n>tve_rvne_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                      <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />                        
+                     <Button id="btnRvneShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${fechamentoIFRS17Model>Rvn/Statusarq} === '2' ? true : false}"></Button> 
+                    <!--<Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Rvne/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>-->                 
+                </f:content>
+            </f:SimpleForm>
 
             <f:SimpleForm
                 id="displayTveFechamentoForm"
@@ -154,17 +232,22 @@
                       <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 text="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                    <Label text="{i18n>processar_txt}" />
+                                state="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />                           
+                    
+
+                    <Button id="btnTveShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${fechamentoIFRS17Model>Tve/Statusarq} === '2' ? true : false}"></Button> 
+
+                    <!--<Label text="{i18n>processar_txt}" />
                     <Switch state="{fechamentoIFRS17Model>Tve/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
-                    </Switch>                 
+                    </Switch>-->               
                 </f:content>
             </f:SimpleForm>
 
-            <!--<f:SimpleForm
+            <f:SimpleForm
                 id="displayJurosFechamentoForm"
                 editable="true"
                 title="{i18n>juros_desc_txt}"
@@ -189,14 +272,18 @@
                                 icon="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 text="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                    <Label text="{i18n>processar_txt}" />
+
+                     <Button id="btnJurosShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${fechamentoIFRS17Model>Juros/Statusarq} === '2' ? true : false}"></Button> 
+
+                    <!--<Label text="{i18n>processar_txt}" />
                     <Switch state="{fechamentoIFRS17Model>Juros/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="false">
                         <layoutData>
                             <FlexItemData growFactor="1" />
                         </layoutData>
-                    </Switch>                 
+                    </Switch>-->               
                 </f:content>
-            </f:SimpleForm>-->
+            </f:SimpleForm>
 
             <!--<f:SimpleForm
                 id="displayBtFechamentoForm"

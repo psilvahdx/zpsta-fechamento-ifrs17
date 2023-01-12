@@ -20,18 +20,12 @@
                 "uri": "/sap/opu/odata/sap/ZPSGW_FECHAMENTO_IFRS17_SRV/",
                 "type": "OData",
                 "settings": {
-                    "annotations": ["annotation"],
+                    "annotations": [],
                     "localUri": "localService/metadata.xml",
                     "odataVersion": "2.0"
                 }
-            },
-            "annotation": {
-                "type": "ODataAnnotation",
-                "uri": "annotations/annotation.xml",
-                "settings": {
-                    "localUri": "annotations/annotation.xml"
-                }
             }
+            
         },
         "crossNavigation": {
             "inbounds": {

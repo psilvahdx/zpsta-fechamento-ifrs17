@@ -1,4 +1,6 @@
-sap.ui.define([], function() {
+sap.ui.define([
+    "sap/ui/core/format/DateFormat"
+], function(DateFormat) {
     'use strict';
 
     var _oResourceBundle = null;
@@ -70,6 +72,31 @@ sap.ui.define([], function() {
             }         
 
             return bResult;
-        }
+        },
+
+        formatDate : function (dDate) {
+			if (dDate == null){ return "";}
+			
+            var oDateFormat = DateFormat.getDateTimeInstance({
+                pattern: "dd/MM/yyyy"
+            });
+            
+            return oDateFormat.format(new Date(dDate), true);
+		},
+		
+		formatTime : function (oTime) {
+			if (oTime === null){ return "";}
+			
+			    var timeString = new Date(oTime.ms).toUTCString();
+
+                var oTimeFormat = DateFormat.getDateTimeInstance({
+                    pattern: "hh:mm:ss"
+                });
+
+
+			
+			return oTimeFormat.format(new Date(timeString), true);
+		}
+
     };
 });

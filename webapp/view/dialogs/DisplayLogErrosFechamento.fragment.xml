@@ -1,0 +1,78 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form" xmlns:t="sap.ui.table">
+    <Dialog title="{i18n>log_erros_tit_txt}" id="displayLogErrosFechamento" contentWidth="80%" draggable="true" resizable="true">
+        <VBox class="sapUiSmallMargin">
+            <t:Table rows="{/LogErrosArqFechIFRS17Set}" selectionMode="None" visibleRowCount="10" threshold="100" paste="onPaste" ariaLabelledBy="title" id="tblLogErros">
+                <t:extension>
+                    <OverflowToolbar design="Auto">
+                        <Title id="title" text="" titleStyle="H4" />
+                        <ToolbarSpacer />
+                        <Button press="onExportLog" type="Transparent" icon="sap-icon://excel-attachment" text="Exportar" tooltip="Exportar" />
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column width="80px">
+                        <Label text="Empresa" />
+                        <t:template>
+                            <Text text="{Bukrs}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="50px">
+                        <Label text="Ano" />
+                        <t:template>
+                            <Text text="{Ano}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="50px">
+                        <Label text="Mês" />
+                        <t:template>
+                            <Text text="{Mes}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="90px">
+                        <Label text="Data proc." />
+                        <t:template>
+                            <Text text="{
+                                path: 'Dataproc', 
+                                formatter:'.formatter.formatDate'}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="90px">
+                        <Label text="Hora proc." />
+                        <t:template>
+                            <Text text="{
+                                path: 'Horaproc', 
+                                formatter:'.formatter.formatTime'}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="90px">
+                        <Label text="Tipo proc." />
+                        <t:template>
+                            <Text text="{Tipoprocesso}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="250px">
+                        <Label text="Nome Arq." />
+                        <t:template>
+                            <Text text="{Nomearquivo}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="90px">
+                        <Label text="Linha Arq." />
+                        <t:template>
+                            <Text text="{Numlinhaarq}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column width="800px">
+                        <Label text="Erro desc." />
+                        <t:template>
+                            <Text text="{Erro}" wrapping="false" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </VBox>
+        <buttons>
+            <Button type="Default" text="{i18n>btn_fechar_txt}" id="btnCloseLogErrorDialog" press="onCloseLogDialog" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

@@ -148,6 +148,47 @@
             </f:SimpleForm>-->
 
             <f:SimpleForm
+                id="rvneFechamentoForm"
+                editable="true"
+                title="{i18n>tve_rvne_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />
+                    <ComboBox id="cbStatusRvne" selectedKey="{fechamentoIFRS17Model>Rvne/Statusarq}" enabled="{fechamentoIFRS17Model>Rvne/enabled}" selectionChange=".onSelectionStatusChange">
+                        <items>
+                            <core:Item key="5" text="{i18n>para_validar_txt}" enabled="false"/>
+                            <core:Item key="1" text="{i18n>valido_txt}" enabled="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
+                            <core:Item key="2" text="{i18n>invalido_txt}"  enabled="false" />
+                            <core:Item key="3" text="{i18n>invalidado_txt}" enabled="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter: '.formatter.getListEnabledStatusByStatus'}" />
+                            <core:Item key="999" text="{i18n>sem_arquivo_txt}"  enabled="false" />
+                        </items>                       
+                    </ComboBox>
+                    <Label text="{i18n>processar_txt}" />
+                    <Switch state="{fechamentoIFRS17Model>Rvne/Acao}" customTextOn="{i18n>sim_txt}" customTextOff="{i18n>nao_txt}" enabled="{fechamentoIFRS17Model>Rvne/enabled}"
+                    change=".onActionFechamentoChange">
+                        <layoutData>
+                            <FlexItemData growFactor="1" />
+                        </layoutData>
+                    </Switch>
+                </f:content>
+            </f:SimpleForm>
+
+
+             <f:SimpleForm
                 id="tveFechamentoForm"
                 editable="true"
                 title="{i18n>tve_desc_txt}"

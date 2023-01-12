@@ -31,7 +31,7 @@ server:
         ignoreCertError: true # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
         backend:
           - path: /sap
-            url: https://u879.portoseguro.brasil:44301
+            url: https://li5762.portoseguro.brasil:44300
             client: '100'
     - name: sap-fe-mockserver
       beforeMiddleware: csp

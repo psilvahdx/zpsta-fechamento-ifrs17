@@ -20,8 +20,10 @@
                         <fb:filterItems>
                             <fb:FilterItem name="Bukrs" label="{i18n>empresa_txt}">
                                 <fb:control>
-                                    <MultiComboBox name="Bukrs" selectionChange=".onSelectionChange">
-                                        <items>
+                                    <MultiComboBox name="Bukrs" selectionChange=".onSelectionChange"
+                                    items="{/EmpresaSet}">
+                                        <core:Item key="{Bukrs}" text="{Bukrs} - {Description}" />
+                                       <!--<items>
                                             <core:Item key="P001" text="P001 - PORTO SEGURO CIA SEGUROS" />
                                             <core:Item key="P014" text="P014 - P S VIDA E PREVIDÊNCIA S" />
                                             <core:Item key="P031" text="P031 - PORTOMED - SERV SAÚDE" />
@@ -30,7 +32,7 @@
                                             <core:Item key="P050" text="P050 - P S - SEGURO SAÚDE S A" />
                                             <core:Item key="P084" text="P084 - ITAÚ AUTO E RESIDÊNCIA" />
                                             <core:Item key="P086" text="P086 - FUNDACAO SAUDE ITAU" />
-                                        </items>
+                                        </items>-->
                                     </MultiComboBox>
                                 </fb:control>
                             </fb:FilterItem>
@@ -71,56 +73,73 @@
                         <content>
                             <Title textAlign="Begin" text="{i18n>title}" />
                             <ToolbarSpacer />
+                            <Button id="btnNavToValidaArq" type="Emphasized" text="{i18n>validar_arquivos_txt}" press=".onNavToValidaArquivos"></Button>
+                            <Button id="btnNavToLogError" type="Default" text="{i18n>log_erros_txt}" press=".onNavToLogErros"></Button>
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>
                 <columns>
-                    <Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>empresa_txt}" width="auto" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>ano_txt}" width="auto" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>mes_txt}" width="auto" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>prg_txt}" width="auto" tooltip="{i18n>prg_desc_txt}" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" >
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center" >
                         <header>
                             <Text text="{i18n>vec_txt}" width="auto" tooltip="{i18n>vec_desc_txt}" />
                         </header>
                     </Column>
-                   <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                   <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>becf_txt}" width="auto" />
                         </header>
-                    </Column>-->
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    </Column>-->                   
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
-                            <Text text="{i18n>tve_txt}" width="auto" tooltip="{i18n>tve_desc_txt}" />
+                            <Text text="{i18n>tve_rvne_txt}" width="auto" tooltip="{i18n>tve_rvne_desc_txt}" />                            
+                        </header>                        
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
+                        <header>
+                            <Text text="{i18n>tve_txt}" width="auto" tooltip="{i18n>tve_desc_txt}" />                            
+                        </header>                        
+                    </Column>
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
+                        <header>
+                            <Text text="{i18n>bca_txt}" width="auto"  tooltip="{i18n>bca_desc_txt}" />
                         </header>
                     </Column>
-                     <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
+                        <header>
+                            <Text text="{i18n>bcd_txt}" width="auto"   tooltip="{i18n>bcd_desc_txt}"/>
+                        </header>
+                    </Column>
+                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>juros_txt}" width="auto" />
                         </header>
                     </Column>
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>bt_txt}" width="auto" />
                         </header>
                     </Column>-->
-                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop">
+                    <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>liberar_fechamento_txt}" width="auto" />
                         </header>
@@ -129,13 +148,13 @@
                 <items>
                     <ColumnListItem type="Navigation" press="onFechamentoItemPress">
                         <cells>
-                            <Text text="{fechamentoIFRS17Model>Bukrs}" />
+                            <Text text="{fechamentoIFRS17Model>Bukrs}"/>
                             <Text text="{fechamentoIFRS17Model>Ano}" />
                             <Text text="{fechamentoIFRS17Model>Mes}" />
                             <ObjectStatus
                                 icon="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}"
-                                state="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusFechamento'}"
+                                state="{path: 'fechamentoIFRS17Model>Prg/Statusarq', formatter:'.formatter.formatStatusFechamento'}"                                
                             />
                             <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
@@ -144,16 +163,28 @@
                             <!--<ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->
+                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->                           
                             <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />   
+                             <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Tve/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                            <!--<ObjectStatus 
+                             <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Bca/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Bca/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Bca/Statusarq', formatter:'.formatter.formatStatusFechamento'}" /> 
+                             <ObjectStatus 
+                                icon="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                tooltip="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />           
+                            <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                            <ObjectStatus 
+                            <!--<ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
                                 state="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->

@@ -6,12 +6,13 @@ sap.ui.define([
         "sap/ui/model/Filter",
         "sap/ui/model/FilterOperator",
         "../model/formatter",
-        "sap/ui/model/json/JSONModel"
+        "sap/ui/model/json/JSONModel",
+        "sap/ui/export/Spreadsheet"
     ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller, MessageBox, MessageToast, Fragment, Filter, FilterOperator, formatter,JSONModel) {
+    function (Controller, MessageBox, MessageToast, Fragment, Filter, FilterOperator, formatter,JSONModel,Spreadsheet) {
         "use strict";
 
         return Controller.extend("portoseguro.zpstafechifrs17app.controller.FechamentoList", {
@@ -126,12 +127,22 @@ sap.ui.define([
                             Acao: false,
                             enabled: false
                         },
-                        Becf: {
+                        Bca: {
+                            Statusarq: "999",
+                            Acao: false,
+                            enabled: false
+                        },
+                        Bcd: {
                             Statusarq: "999",
                             Acao: false,
                             enabled: false
                         },
                         Tve: {
+                            Statusarq: "999",
+                            Acao: false,
+                            enabled: false
+                        },
+                        Rvne: {
                             Statusarq: "999",
                             Acao: false,
                             enabled: false
@@ -170,8 +181,15 @@ sap.ui.define([
                                 enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
                             }
                         }
-                        if (item.Tipoarqproc === 'BECF') {
-                            oRow.Becf = {
+                        if (item.Tipoarqproc === 'BCA') {
+                            oRow.Bca = {
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false,
+                                enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
+                            }
+                        }
+                        if (item.Tipoarqproc === 'BCD') {
+                            oRow.Bcd = {
                                 Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
                                 Acao: item.Acao === "X" ? true : false,
                                 enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
@@ -179,6 +197,13 @@ sap.ui.define([
                         }
                         if (item.Tipoarqproc === 'TVE') {
                             oRow.Tve = {
+                                Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
+                                Acao: item.Acao === "X" ? true : false,
+                                enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
+                            }
+                        }
+                        if (item.Tipoarqproc === 'RVN') {
+                            oRow.Rvne = {
                                 Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
                                 Acao: item.Acao === "X" ? true : false,
                                 enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
@@ -274,6 +299,10 @@ sap.ui.define([
                         oObject.Tve.enabled = bEnabled;
                         oObject.Tve.Acao = bEnabled;
                         break;
+                    case "cbStatusRvne":
+                        oObject.Rvne.enabled = bEnabled;
+                        oObject.Rvne.Acao = bEnabled;
+                        break;    
                     case "cbStatusVec":
                         oObject.Vec.enabled = bEnabled;
                         oObject.Vec.Acao = bEnabled;
@@ -345,8 +374,7 @@ sap.ui.define([
                 }, []);
 
                 this.getFechamentoData(aTableFilters);
-                /*oTable.getBinding("items").filter(aTableFilters);
-                oTable.setShowOverlay(false);*/
+             
             },
             onClearFilter: function () {
                 var oFilterBar = this.byId("filterbar"),
@@ -443,7 +471,7 @@ sap.ui.define([
                     sPath = oContext.fechamentoIFRS17Model.getPath(),
                     oObject = oFechamentoIFRS17Model.getObject(sPath);
 
-                if (oObject.LiberaFechamento && !oObject.EtapasValidas) {
+                //if (oObject.LiberaFechamento && !oObject.EtapasValidas) {
                     //Somente Visualização
                     sDialogName = "portoseguro.zpstafechifrs17app.view.dialogs.DisplayStepsFechamento";
                     if (!this.oDialogDisplay) {
@@ -461,7 +489,7 @@ sap.ui.define([
                         });
                         oDialogDisplay.open();
                     }.bind(this));
-                } else {
+                /*} else {
                     //Edição
                     sDialogName = "portoseguro.zpstafechifrs17app.view.dialogs.EditStepsFechamento"
                     if (!this.oDialog) {
@@ -479,7 +507,7 @@ sap.ui.define([
                         });
                         oDialog.open();
                     }.bind(this));
-                }
+                }*/
 
 
 
@@ -514,16 +542,32 @@ sap.ui.define([
                 if (oFechamento) {
 
                     if (!oFechamento.LiberaFechamento) {
-                        if (
-                            (oFechamento.Prg.Acao === true && oFechamento.Prg.Statusarq === "1") &&
-                            (oFechamento.Vec.Acao === true && oFechamento.Vec.Statusarq === "1") &&
-                            // (oFechamento.Becf.Acao === true && oFechamento.Becf.Statusarq === "1") &&
-                            (oFechamento.Tve.Acao === true && oFechamento.Tve.Statusarq === "1") //&&
-                            //(oFechamento.Juros.Acao === true && oFechamento.Juros.Statusarq === "1") &&
-                            //(oFechamento.Bt.Acao === true && oFechamento.Bt.Statusarq === "1")
-                        ) {
-                            isEnabled = true;
+                        
+                        //Arquivos Obrigatorios por Empresa
+                        if(oFechamento.Bukrs === 'P001'){
+                            if (
+                                oFechamento.Prg.Statusarq === "1" &&
+                                oFechamento.Vec.Statusarq === "1" &&
+                                oFechamento.Bca.Statusarq === "1" &&
+                                oFechamento.Bcd.Statusarq === "1" &&
+                                oFechamento.Tve.Statusarq === "1" &&
+                                oFechamento.Rvne.Statusarq === "1"
+                            ) {
+                                isEnabled = true;
+                            }
+                        }else{
+                            if (
+                                oFechamento.Prg.Statusarq === "1" &&
+                                oFechamento.Vec.Statusarq === "1" &&
+                                oFechamento.Bca.Statusarq === "1" &&                                
+                                oFechamento.Tve.Statusarq === "1" &&
+                                oFechamento.Rvne.Statusarq === "1"
+                            ) {
+                                isEnabled = true;
+                            }
                         }
+
+                       
 
                     }
 
@@ -539,7 +583,9 @@ sap.ui.define([
                 delete oObject.Prg.enabled;
                 delete oObject.Vec.enabled;
                 delete oObject.Tve.enabled;
-                delete oObject.Becf.enabled;
+                delete oObject.Rvne.enabled;
+                delete oObject.Bca.enabled;
+                delete oObject.Bcd.enabled;
                 delete oObject.Juros.enabled;
                 delete oObject.Bt.enabled;
 
@@ -567,7 +613,7 @@ sap.ui.define([
                     error: function (oError) {
                         oViewModel.setProperty("/busy",false);
                         let oJSonErrosResponse = JSON.parse(oError.responseText);
-                        let sErrorText = `${sErrorMessage}!
+                        let sErrorText = `${sErrorMessage}
 
                         ERRO:
                             ${oJSonErrosResponse.error.message.value}`;
@@ -578,6 +624,166 @@ sap.ui.define([
 
                 });
 
+            },
+            onNavToLogErros: function(oEvent){
+
+                var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+				var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+					target: {
+						semanticObject: "ZSOFPSL",
+						action: "zpsta_fechifrs17_log"
+					},
+					params: {
+					}
+				})) || ""; // generate the Hash to display a Supplier
+				oCrossAppNavigator.toExternal({
+					target: {
+						shellHash: hash
+					}
+				});
+            },
+            onNavToValidaArquivos: function(oEvent){
+
+                var oCrossAppNavigator = sap.ushell.Container.getService("CrossApplicationNavigation");
+				var hash = (oCrossAppNavigator && oCrossAppNavigator.hrefForExternal({
+					target: {
+						semanticObject: "ZSOFPSL",
+						action: "ZPSFP_0007"
+					},
+					params: {
+					}
+				})) || ""; // generate the Hash to display a Supplier
+				oCrossAppNavigator.toExternal({
+					target: {
+						shellHash: hash
+					}
+				});
+            },
+            onShowLogErros: function(oEvent){
+
+                var that = this;
+                let sDialogName = "",                 
+                    oCtx = oEvent.getSource().oPropagatedProperties.oBindingContexts,
+                    oFechamentoModel = this.getModel("fechamentoIFRS17Model"),
+                    oSelectedItem = oFechamentoModel.getObject(oCtx.fechamentoIFRS17Model.getPath());
+                    
+                  
+                    switch (oEvent.getParameter("id")) {
+                        case "btnRvneShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'RVN';
+                            break;                   
+                        case "btnTveShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'TVE';
+                            break;                   
+                        case "btnPrgShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'PRG';
+                            break;                   
+                        case "btnVecShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'VEC';
+                            break;   
+                        case "btnBcaShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'BCA';
+                            break;                                 
+                        case "btnBcdShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'BCD';
+                            break;                     
+                        case "btnJurosShowLogError":
+                            oSelectedItem.TipoProcessoFilter = 'JUROS';
+                            break;                   
+                    }
+
+
+
+                that.selectedItemFilter = oSelectedItem;    
+
+          
+                sDialogName = "portoseguro.zpstafechifrs17app.view.dialogs.DisplayLogErrosFechamento";
+                if (!this.oDialogDisplayLogErros) {
+                    this.oDialogDisplayLogErros = Fragment.load({
+                        name: sDialogName,
+                        controller: this
+                    });
+
+                }
+                this.oDialogDisplayLogErros.then(function (oDialogDisplayLogErros) {
+                    that.getView().addDependent(oDialogDisplayLogErros);
+                    
+                    let aFilters = [new Filter({
+                        path: 'Ano',
+                        operator: FilterOperator.EQ,
+                        value1: that.selectedItemFilter.Ano
+                    }),
+                    new Filter({
+                        path: 'Bukrs',
+                        operator: FilterOperator.EQ,
+                        value1: that.selectedItemFilter.Bukrs
+                    }),
+                    new Filter({
+                        path: 'Mes',
+                        operator: FilterOperator.EQ,
+                        value1: that.selectedItemFilter.Mes
+                    }),
+                    new Filter({
+                        path: 'Tipoprocesso',
+                        operator: FilterOperator.EQ,
+                        value1: oSelectedItem.TipoProcessoFilter
+                    })];
+                    sap.ui.getCore().byId("tblLogErros").getBinding("rows").filter(aFilters);
+
+
+                    oDialogDisplayLogErros.open();
+                }.bind(this));
+
+            },
+            onCloseLogDialog: function (oEvent) {                           
+                sap.ui.getCore().byId("displayLogErrosFechamento").close();
+            },
+            createColumnConfig: function() {
+                var aCols = [];
+                
+                aCols.push({label: 'Empresa', property: 'Bukrs'});
+                aCols.push({label: 'Ano', property: 'Ano'});
+                aCols.push({label: 'Mes', property: 'Mes'});
+                aCols.push({label: 'Dataproc', property: 'Dataproc', type: 'date'});
+                aCols.push({label: 'Horaproc', property: 'Horaproc', type: sap.ui.export.EdmType.Time});
+                aCols.push({label: 'Tipoprocesso', property: 'Tipoprocesso'});
+                aCols.push({label: 'Linha Arq', property: 'Numlinhaarq'});
+                aCols.push({label: 'Nome Arq', property: 'Nomearquivo'});
+                aCols.push({label: 'Erro desc', property: 'Erro'});
+    
+                return aCols;
+            },
+    
+            
+            onExportLog: function() {
+                var aCols, oSettings, oSheet;
+
+    
+                var oTable = sap.ui.getCore().byId("tblLogErros");
+                var oRowBinding = oTable.getBinding('rows');
+    
+                aCols = this.createColumnConfig();
+    
+                var oModel = oRowBinding.getModel();
+    
+                oSettings = {
+                    workbook: { columns: aCols, context: {sheetName: 'LOG_ERROS_AQRUIVO'}},
+                    dataSource: {
+                        type: 'odata',
+                        dataUrl: oRowBinding.getDownloadUrl ? oRowBinding.getDownloadUrl() : null,
+                        serviceUrl: this._sServiceUrl,
+                        headers: oModel.getHeaders ? oModel.getHeaders() : null,
+                        count: oRowBinding.getLength ? oRowBinding.getLength() : null,
+                        useBatch: true },
+                    fileName: `LOG_ERROS_AQRUIVO_IFRS17.xlsx`
+                };
+    
+                oSheet = new Spreadsheet(oSettings);
+                oSheet.build()
+                    .then( function() {
+                        MessageToast.show('Sucesso ao exportar!');
+                    })
+                    .finally(oSheet.destroy);
             }
 
         });
