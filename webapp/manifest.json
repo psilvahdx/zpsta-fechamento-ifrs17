@@ -100,9 +100,9 @@
                 "type": "sap.ui.model.json.JSONModel",
                 "uri": "model/listFechamentoIFRS17.json"
             },
-            "controleEtapasFechamentoModel":{
+            "jurosIFRS17Model":{
                 "type": "sap.ui.model.json.JSONModel",
-                "uri": "model/controleEtapasFechamento.json"
+                "uri": "model/listFechamentoIFRS17.json"
             }
         },
         "resources": {
@@ -129,6 +129,13 @@
                     "target": [
                         "TargetFechamentoList"
                     ]
+                },
+                {
+                    "name": "RouteJurosList",
+                    "pattern": "Juros",
+                    "target": [
+                        "TargetJurosList"
+                    ]
                 }
             ],
             "targets": {
@@ -138,6 +145,13 @@
                     "clearControlAggregation": false,
                     "viewId": "FechamentoList",
                     "viewName": "FechamentoList"
+                },
+                "TargetJurosList": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "JurosList",
+                    "viewName": "JurosList"
                 }
             }
         },

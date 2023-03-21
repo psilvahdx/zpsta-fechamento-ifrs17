@@ -1,18 +1,5 @@
 <mvc:View controllerName="portoseguro.zpstafechifrs17app.controller.FechamentoList" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:tnt="sap.tnt" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:fb="sap.ui.comp.filterbar" xmlns:f="sap.f">
-    <f:DynamicPage headerExpanded="true" busy="{fechamentoListView>/busy}">
-        <!--<f:title>
-				<f:DynamicPageTitle>
-					<f:heading>
-						<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
-					</f:heading>
-					<f:expandedContent>
-						<Label id="expandedLabel" text="No filters active" />
-					</f:expandedContent>
-					<f:snappedContent>
-						<Label id="snappedLabel" text="No filters active" />
-					</f:snappedContent>
-				</f:DynamicPageTitle>
-			</f:title>-->
+    <f:DynamicPage headerExpanded="true" busy="{fechamentoListView>/busy}">      
         <f:header>
             <f:DynamicPageHeader>
                 <f:content>
@@ -22,17 +9,7 @@
                                 <fb:control>
                                     <MultiComboBox name="Bukrs" selectionChange=".onSelectionChange"
                                     items="{/EmpresaSet}">
-                                        <core:Item key="{Bukrs}" text="{Bukrs} - {Description}" />
-                                       <!--<items>
-                                            <core:Item key="P001" text="P001 - PORTO SEGURO CIA SEGUROS" />
-                                            <core:Item key="P014" text="P014 - P S VIDA E PREVIDÊNCIA S" />
-                                            <core:Item key="P031" text="P031 - PORTOMED - SERV SAÚDE" />
-                                            <core:Item key="P032" text="P032 - PORTO SEGURO ODONTO" />
-                                            <core:Item key="P035" text="P035 - AZUL COMPANHIA SEG.GERAIS" />
-                                            <core:Item key="P050" text="P050 - P S - SEGURO SAÚDE S A" />
-                                            <core:Item key="P084" text="P084 - ITAÚ AUTO E RESIDÊNCIA" />
-                                            <core:Item key="P086" text="P086 - FUNDACAO SAUDE ITAU" />
-                                        </items>-->
+                                        <core:Item key="{Bukrs}" text="{Bukrs} - {Description}" />                                   
                                     </MultiComboBox>
                                 </fb:control>
                             </fb:FilterItem>
@@ -74,6 +51,7 @@
                             <Title textAlign="Begin" text="{i18n>title}" />
                             <ToolbarSpacer />
                             <Button id="btnNavToValidaArq" type="Emphasized" text="{i18n>validar_arquivos_txt}" press=".onNavToValidaArquivos"></Button>
+                            <Button id="btnNavToJuros" type="Default" text="{i18n>validar_juros_txt}" press=".onNavToJuros"></Button>
                             <Button id="btnNavToLogError" type="Default" text="{i18n>log_erros_txt}" press=".onNavToLogErros"></Button>
                         </content>
                     </OverflowToolbar>
@@ -103,12 +81,7 @@
                         <header>
                             <Text text="{i18n>vec_txt}" width="auto" tooltip="{i18n>vec_desc_txt}" />
                         </header>
-                    </Column>
-                   <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
-                        <header>
-                            <Text text="{i18n>becf_txt}" width="auto" />
-                        </header>
-                    </Column>-->                   
+                    </Column>                             
                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>tve_rvne_txt}" width="auto" tooltip="{i18n>tve_rvne_desc_txt}" />                            
@@ -128,17 +101,7 @@
                         <header>
                             <Text text="{i18n>bcd_txt}" width="auto"   tooltip="{i18n>bcd_desc_txt}"/>
                         </header>
-                    </Column>
-                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
-                        <header>
-                            <Text text="{i18n>juros_txt}" width="auto" />
-                        </header>
-                    </Column>
-                    <!-- <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
-                        <header>
-                            <Text text="{i18n>bt_txt}" width="auto" />
-                        </header>
-                    </Column>-->
+                    </Column>                          
                     <Column width="auto" demandPopin="true" popinDisplay="Inline" minScreenWidth="Desktop" hAlign="Center">
                         <header>
                             <Text text="{i18n>liberar_fechamento_txt}" width="auto" />
@@ -159,11 +122,7 @@
                             <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                            <!--<ObjectStatus 
-                                icon="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
-                                tooltip="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Becf/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->                           
+                                state="{path: 'fechamentoIFRS17Model>Vec/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />                                           
                             <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Rvne/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
@@ -179,15 +138,7 @@
                              <ObjectStatus 
                                 icon="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
                                 tooltip="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />           
-                            <ObjectStatus 
-                                icon="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
-                                tooltip="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Juros/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
-                            <!--<ObjectStatus 
-                                icon="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
-                                tooltip="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
-                                state="{path: 'fechamentoIFRS17Model>Bt/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />-->
+                                state="{path: 'fechamentoIFRS17Model>Bcd/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />                                                         
                             <Switch 
                                 enabled="{fechamentoIFRS17Model>EtapasValidas}"
                                 state="{fechamentoIFRS17Model>LiberaFechamento}" 

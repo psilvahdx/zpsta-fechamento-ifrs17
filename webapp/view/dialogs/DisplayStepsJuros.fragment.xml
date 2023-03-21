@@ -1,0 +1,224 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.ui.layout.form">
+    <Dialog title="{i18n>juros_tit_txt}" id="displayJurosDialog" contentWidth="80%" draggable="true" resizable="true" >
+        <VBox class="sapUiSmallMargin">
+            <f:SimpleForm
+                id="displayHeaderJurosForm"
+                editable="false"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+                title="{i18n>juros_txt}"
+            >
+                <f:content>                
+                    <Label text="{i18n>ano_txt}" />
+                    <Text text="{jurosIFRS17Model>Ano}" />
+                    <Label text="{i18n>mes_txt}" />
+                    <Text text="{jurosIFRS17Model>Mes}" />
+                </f:content>
+            </f:SimpleForm>
+            <f:SimpleForm
+                id="displayIgpmForm"
+                editable="false"
+                title="{i18n>igpm_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                       
+                     <ObjectStatus 
+                                icon="{path: 'jurosIFRS17Model>Igpm/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'jurosIFRS17Model>Igpm/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'jurosIFRS17Model>Igpm/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                     <Button id="btnIgpmShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                     visible="{= ${jurosIFRS17Model>Igpm/Statusarq} === '2' ? true : false}"></Button>    
+                 
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="displayIpcaForm"
+                editable="true"
+                title="{i18n>ipca_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                     <ObjectStatus 
+                                icon="{path: 'jurosIFRS17Model>Ipca/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'jurosIFRS17Model>Ipca/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'jurosIFRS17Model>Ipca/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                    <Button id="btnIpcaShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                     visible="{= ${jurosIFRS17Model>Ipca/Statusarq} === '2' ? true : false}"></Button>                                  
+                  
+                </f:content>
+            </f:SimpleForm>
+
+           <f:SimpleForm
+                id="displayPfixForm"
+                editable="true"
+                title="{i18n>pfix_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                     <ObjectStatus 
+                                icon="{path: 'jurosIFRS17Model>Pfix/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'jurosIFRS17Model>Pfix/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'jurosIFRS17Model>Pfix/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                    <Button id="btnPfixShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                     visible="{= ${jurosIFRS17Model>Pfix/Statusarq} === '2' ? true : false}"></Button>   
+              
+                </f:content>
+            </f:SimpleForm>
+
+             <f:SimpleForm
+                id="displayTigpForm"
+                editable="true"
+                title="{i18n>tigp_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                     <ObjectStatus 
+                                icon="{path: 'jurosIFRS17Model>Tigp/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'jurosIFRS17Model>Tigp/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'jurosIFRS17Model>Tigp/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />
+                     <Button id="btnTigpShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${jurosIFRS17Model>Tigp/Statusarq} === '2' ? true : false}"></Button> 
+                
+                </f:content>
+            </f:SimpleForm>
+
+
+            <f:SimpleForm
+                id="displayTipcForm"
+                editable="true"
+                title="{i18n>tipc_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                      <ObjectStatus 
+                                icon="{path: 'jurosIFRS17Model>Tipc/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'jurosIFRS17Model>Tipc/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'jurosIFRS17Model>Tipc/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />                        
+                     <Button id="btnTipcShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${jurosIFRS17Model>Tipc/Statusarq} === '2' ? true : false}"></Button> 
+               
+                </f:content>
+            </f:SimpleForm>
+
+            <f:SimpleForm
+                id="displayTpfiForm"
+                editable="true"
+                title="{i18n>tpfi_desc_txt}"
+                layout="ResponsiveGridLayout"
+                labelSpanXL="4"
+                labelSpanL="4"
+                labelSpanM="12"
+                labelSpanS="12"
+                adjustLabelSpan="false"
+                emptySpanXL="0"
+                emptySpanL="0"
+                emptySpanM="0"
+                emptySpanS="0"
+                columnsXL="2"
+                columnsL="2"
+                columnsM="1"
+                singleContainerFullSize="false"
+            >
+                <f:content>
+                    <Label text="{i18n>status_txt}" />                    
+                      <ObjectStatus 
+                                icon="{path: 'jurosIFRS17Model>Tpfi/Statusarq', formatter:'.formatter.formatStatusIconFechamento'}"
+                                text="{path: 'jurosIFRS17Model>Tpfi/Statusarq', formatter:'.formatter.formatStatusTextFechamento'}" 
+                                state="{path: 'jurosIFRS17Model>Tpfi/Statusarq', formatter:'.formatter.formatStatusFechamento'}" />                           
+                    
+
+                    <Button id="btnTpfiShowLogError" type="Transparent" text="{i18n>log_erros_txt}" press=".onShowLogErros"
+                      visible="{= ${jurosIFRS17Model>Tpfi/Statusarq} === '2' ? true : false}"></Button> 
+
+                </f:content>
+            </f:SimpleForm>            
+          
+        </VBox>
+        <buttons>            
+            <Button type="Default"  text="{i18n>btn_cancelar_txt}" id="displayCancelJuros" press="onCancel" ariaLabelledBy="editButtonLabel" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

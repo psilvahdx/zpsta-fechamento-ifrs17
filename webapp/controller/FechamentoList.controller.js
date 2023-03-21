@@ -195,7 +195,7 @@ sap.ui.define([
                                 enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
                             }
                         }
-                        if (item.Tipoarqproc === 'TVE') {
+                        if (item.Tipoarqproc === 'RCR') {
                             oRow.Tve = {
                                 Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
                                 Acao: item.Acao === "X" ? true : false,
@@ -209,13 +209,13 @@ sap.ui.define([
                                 enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
                             }
                         }
-                        if (item.Tipoarqproc === 'JUROS') {
+                       /* if (item.Tipoarqproc === 'JUROS') {
                             oRow.Juros = {
                                 Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
                                 Acao: item.Acao === "X" ? true : false,
                                 enabled: this.enableActionsEditFechamento(item.Statusarq, item.Acao)
                             }
-                        }
+                        }*/
                         if (item.Tipoarqproc === 'BT') {
                             oRow.Bt = {
                                 Statusarq: item.Statusarq === "" ? "5" : item.Statusarq,
@@ -397,9 +397,7 @@ sap.ui.define([
             },
             onStateFechamentoChange: function (oEvent) {
 
-                var oStateFechamentoControl = oEvent.getSource(),
-                    //oCtx = oStateFechamentoControl.getBindingContext(),
-                    //oObject = this.getModel().getObject(oCtx.getPath());
+                var oStateFechamentoControl = oEvent.getSource(),                   
                     oCtx = oStateFechamentoControl.oPropagatedProperties.oBindingContexts,
                     that = this,
                     oFechamentoModel = this.getModel("fechamentoIFRS17Model"),
@@ -417,8 +415,7 @@ sap.ui.define([
                             if (sAction == MessageBox.Action.YES) {
 
                                 oObject.EtapasValidas = false;
-                                that.sendLiberacaoFechamentoIFRS17(oObject);
-                                //oFechamentoModel.refresh();
+                                that.sendLiberacaoFechamentoIFRS17(oObject);                               
                             } else {
                                 oStateFechamentoControl.setState(false);
 
@@ -659,6 +656,10 @@ sap.ui.define([
 					}
 				});
             },
+            onNavToJuros: function(oEvent){
+
+                this.getRouter().navTo("RouteJurosList");
+            },
             onShowLogErros: function(oEvent){
 
                 var that = this;
@@ -673,7 +674,7 @@ sap.ui.define([
                             oSelectedItem.TipoProcessoFilter = 'RVN';
                             break;                   
                         case "btnTveShowLogError":
-                            oSelectedItem.TipoProcessoFilter = 'TVE';
+                            oSelectedItem.TipoProcessoFilter = 'RCR';
                             break;                   
                         case "btnPrgShowLogError":
                             oSelectedItem.TipoProcessoFilter = 'PRG';
@@ -767,7 +768,7 @@ sap.ui.define([
                 var oModel = oRowBinding.getModel();
     
                 oSettings = {
-                    workbook: { columns: aCols, context: {sheetName: 'LOG_ERROS_AQRUIVO'}},
+                    workbook: { columns: aCols, context: {sheetName: 'LOG_ERROS_ARQUIVO'}},
                     dataSource: {
                         type: 'odata',
                         dataUrl: oRowBinding.getDownloadUrl ? oRowBinding.getDownloadUrl() : null,
@@ -775,7 +776,7 @@ sap.ui.define([
                         headers: oModel.getHeaders ? oModel.getHeaders() : null,
                         count: oRowBinding.getLength ? oRowBinding.getLength() : null,
                         useBatch: true },
-                    fileName: `LOG_ERROS_AQRUIVO_IFRS17.xlsx`
+                    fileName: `LOG_ERROS_ARQUIVO_IFRS17.xlsx`
                 };
     
                 oSheet = new Spreadsheet(oSettings);
